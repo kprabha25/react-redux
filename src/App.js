@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Hello from "./Hello";
 import store, { COUNTER_INCREMENT, COUNTER_DECREMENT } from './reduxes/store'
+import {Provider} from 'react-redux'
 
 export default class App extends Component {
   constructor() {
@@ -27,6 +28,7 @@ export default class App extends Component {
   }
   render() {
     return (
+      <Provider store= {store}>
       <div>
         <Hello name={this.state.name}></Hello>
         <button onClick={this.increment}>Increment</button>
@@ -34,6 +36,7 @@ export default class App extends Component {
         <button onClick={this.push}>Push</button>
         <button onClick={this.pop}>Pop</button>
       </div>
+      </Provider>
     );
   }
 }

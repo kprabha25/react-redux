@@ -26,6 +26,7 @@ const testReducer = (state=[], action)=>{
     switch (action.type) {
         case 'push': {
             const data = [...state]
+            console.log(data)
             data.push(action.value)
             return [...data]
             break;
@@ -37,12 +38,13 @@ const testReducer = (state=[], action)=>{
             break;
         }
         default:
-            break;
+            return state
     }
 }
 
 const rootReducer = (state = [], action) =>{
     return{
+        //on every state change both reducer will get called
         counter: countReducer(state.counter, action),
         tester: testReducer(state.tester, action)
     }
