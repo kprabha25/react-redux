@@ -42,14 +42,37 @@ const testReducer = (state=[], action)=>{
     }
 }
 
+const dataReducer = (state={data: null}, action) =>{
+    switch (action.type) {
+        case 'setData':
+            return {data: action.data}
+            break;
+        case 'removeData':
+            return {data: null}
+            break;
+        default:
+            return state;
+    }
+
+}
+const rootReducer = redux.combineReducers({
+    counter: countReducer,
+    tester: testReducer,
+    storage: dataReducer
+})
+/*
 const rootReducer = (state = [], action) =>{
     return{
-        //on every state change both reducer will get called
+        //on every state change both reducer will get called, here we call reducer function.
+        //but in combined reducer we don't call instead we assign function defintion
         counter: countReducer(state.counter, action),
-        tester: testReducer(state.tester, action)
+        tester: testReducer(state.tester, action),
+        storage: dataReducer(state.storage, action)
     }
 }
 
 //const store = redux.createStore(reducer)
+const store = redux.createStore(rootReducer)
+*/
 const store = redux.createStore(rootReducer)
 export default store

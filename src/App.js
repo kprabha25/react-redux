@@ -30,7 +30,9 @@ export default class App extends Component {
     return (
       <Provider store= {store}>
       <div>
-        <Hello name={this.state.name}></Hello>
+        <Hello name={this.state.name}></Hello> 
+        <br />
+        <br />
         <button onClick={this.increment}>Increment</button>
         <button onClick={this.decrement}>Decrement</button>
         <button onClick={this.push}>Push</button>

@@ -2,29 +2,28 @@ import { render } from "@testing-library/react";
 import React, {Component } from "react";
 import { connect } from 'react-redux'
 import {COUNTER_INCREMENT, COUNTER_DECREMENT} from './reduxes/store'
+import axios from 'axios'
 // change the hello component to redux component by connect function
 
-// let Hello = (props) => {
-//     return <h1>
-//     <button onClick={props.increment}>Hello-Increment</button>
-//     <button onClick={props.decrement}>Hello-Decrement</button><br />
-//     Hello, {props.name} - {props.count}
-//     </h1>;
-// }
-
 class Hello extends Component  {
-  add = (data)=>{
-    const count = 'count : '+this.props.count
-    this.props.update(count)
+  state = {data: []}
+  getData = (data)=>{
+    if(this.props.data.length == 0){
+      axios.get('https://jsonplaceholder.typicode.com/posts')
+        .then(result => {
+          console.log('Data Fetched')
+          this.props.setData(result.data)
+        })
+    }
   }
   render(){
-    return( <h1>
-      <button onClick={this.props.increment}>Hello-Increment</button>
-      <button onClick={this.props.decrement}>Hello-Decrement</button>
-      <button onClick={this.add}>Hello-Push</button>
-      <br />PUshed Data : {this.props.data.length} <br /> 
-      <br />Hello, {this.props.name} - {this.props.count}
-      </h1>);
+    return( <>
+      <h1>Hello from Hello Component</h1>
+      {/* <button onClick={this.getData}>Get Data</button> */}
+      <button onClick={this.props.setData}>Get Data</button>
+      <button onClick={this.props.removeData}>Remove Data</button>
+      {this.props.data.map((x,i) => <div key={i}> {x.title}</div>)}
+      </>);
   }
 }
 
@@ -34,8 +33,7 @@ class Hello extends Component  {
 //to get value from state, use this
 const mapStateToProps = (state)=>{
   return {
-    count: state.counter.count,
-    data: state.tester
+    data: state.storage.data || []
   }
 }
 
@@ -43,14 +41,17 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps = (dispatch)=>{
   //we create object with function defintion
   return {
-    increment: ()=>{
-      dispatch({type: COUNTER_INCREMENT})
+    setData: (data)=>{
+      axios.get('https://jsonplaceholder.typicode.com/posts')
+        .then(result => {
+          console.log('Data Fetched')
+          //this.props.setData(result.data)
+          dispatch({type: 'setData', data: result.data})
+        })
+      
     },
-    decrement: ()=>{
-      dispatch({type: COUNTER_DECREMENT})
-    },
-    update: (data)=>{
-      dispatch({type:'push', value: data})
+    removeData:()=>{
+      dispatch({type: 'removeData'})
     }
   }
 }
