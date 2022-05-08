@@ -7,15 +7,7 @@ import axios from 'axios'
 
 class Hello extends Component  {
   state = {data: []}
-  getData = (data)=>{
-    if(this.props.data.length == 0){
-      axios.get('https://jsonplaceholder.typicode.com/posts')
-        .then(result => {
-          console.log('Data Fetched')
-          this.props.setData(result.data)
-        })
-    }
-  }
+  
   render(){
     return( <>
       <h1>Hello from Hello Component</h1>
@@ -25,6 +17,17 @@ class Hello extends Component  {
       {this.props.data.map((x,i) => <div key={i}> {x.title}</div>)}
       </>);
   }
+}
+
+const separateGet = (name) =>{
+  return (dispatch, getState)=>{
+    axios.get('https://jsonplaceholder.typicode.com/posts')
+        .then(result => {
+          console.log(`Data Fetched -  ${name} - ${getState}`)
+          dispatch({type: 'setData', data: result.data})
+        })
+  }
+
 }
 
 // here state is complete store's reducers
@@ -42,13 +45,14 @@ const mapDispatchToProps = (dispatch)=>{
   //we create object with function defintion
   return {
     setData: (data)=>{
-      axios.get('https://jsonplaceholder.typicode.com/posts')
-        .then(result => {
-          console.log('Data Fetched')
-          //this.props.setData(result.data)
-          dispatch({type: 'setData', data: result.data})
-        })
-      
+      // axios.get('https://jsonplaceholder.typicode.com/posts')
+      //   .then(result => {
+      //     console.log('Data Fetched')
+      //     //this.props.setData(result.data)
+      //     dispatch({type: 'setData', data: result.data})
+      //   })
+      //using thunk we can replace the above code
+      dispatch(separateGet('Azxy'))
     },
     removeData:()=>{
       dispatch({type: 'removeData'})
