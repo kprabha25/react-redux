@@ -1,6 +1,7 @@
 
 
 ## 04 - Redux Thunk
+16) Redux thunk - Learn React js in Tamil
 1. It is a middleware , like a wrapper to redux
 2. As we used Thunk, wit in dispatch we can give action creaters, along with action
     a. Here the separate function should return a arrow function, here dispatch will be input parameters
