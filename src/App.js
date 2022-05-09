@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Hello from "./Hello";
+import Hello from "./components/Hello";
 import {Provider} from 'react-redux'
 import { getStore } from './store';
-import Users from './Users'
+import Users from './components/Users'
 
 const store = getStore();
 

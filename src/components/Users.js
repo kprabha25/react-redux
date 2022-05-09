@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Axios from 'axios';
 import { connect } from 'react-redux';
-import { SET_USERS, GET_USERS } from './actions';
+import { SET_USERS, GET_USERS } from '../actions';
 
 class Users extends React.Component {
 
