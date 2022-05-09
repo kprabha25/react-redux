@@ -1,26 +1,15 @@
 
 
-## 04 - Redux Thunk
-16) Redux thunk - Learn React js in Tamil
-1. It is a middleware , like a wrapper to redux
-2. As we used Thunk, wit in dispatch we can give action creaters, along with action
-    a. Here the separate function should return a arrow function, here dispatch will be input parameters
-    b. this arrow function can have two parameters one is 'dispatch', another one is 'getstate'
-3. Install 'redux-thunk' and import thunk
-4. we have to use this middleware through redux function caled applymiddleware
+## 04 - Redux Saga
+    28) Redux Saga implementation - Learn React js in Tamil
+    1. create watcher function
+    2. create worker function
+    3. create root saga
+    4. applyMiddleware(reduxsagamiddleware)
+    5. all the dispatch actions goes through saga middleware
 
-# Ex : store.s
-    const rootReducer = redux.combineReducers({
-        counter: CoutReducer,
-        tester: testReducer,
-        storage: dataReducer
-    })
-
-    const store = reducer.createStore(rootReducer. redux.applyMiddleware(thunk))
-    export default store
-
-# react-redux
-React Redux Concept
+# Note : 
+we need to call all function in rootsaga file
 
 node - 15.1.0
 npx creat-react-app
